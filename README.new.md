@@ -18,12 +18,28 @@ vagrant up
 vagrant ssh
 cd /vagrant
 source bin/activate
-pip install -r treeio/requirements.pip
-cd /vagrant/lib/python2.7/site-packages/django
-sudo patch -p1 < ../../../../code/bin/django-related-fields.patch
+sudo /vagrant/bin/pip install -r treeio/requirements.pip
+cd treeio
+sudo python related_fields_patch.py /vagrant/lib/python2.7/site-packages/django
 
-http://192.168.33.10/phpmyadmin
-create database treeio
+create database treeio (http://192.168.33.10/phpmyadmin)
+
+python manage.py installdb
+python manage.py loaddata data.json
+
+deactivate
+
+Running the server
+===================
+cd /vagrant/treeio/bin
+./start.sh
+./stop.sh
+
+
+sudo pip2.7 install supervisor
+
+
+
 
 
 

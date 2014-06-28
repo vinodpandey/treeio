@@ -1,0 +1,1 @@
+sudo cp -f /vagrant/treeio/puppet/conf/resolv.conf /etc/resolv.conf

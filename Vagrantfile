@@ -21,18 +21,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # fix for internet not working in vm issue
-  config.vm.provision :shell, :inline => "sudo cp -f /vagrant/treeio/puppet/conf/resolv.conf /etc/resolv.conf"
+  config.vm.provision :shell, :path => "puppet/scripts/network_fix.sh"
 
-
-  #inline shell stuff
 
   # turnoff firewall
-  config.vm.provision :shell, :inline => "sudo /etc/init.d/iptables save"
-  config.vm.provision :shell, :inline => "sudo /etc/init.d/iptables stop"
-  # turnoff firewall on boot
-  config.vm.provision :shell, :inline => "sudo chkconfig iptables off"
-
-  
+  config.vm.provision :shell, :path => "puppet/scripts/firewall.sh"
 
 
   # installing puppet modules
@@ -45,5 +38,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :shell, :path => "puppet/scripts/python.sh"
   config.vm.provision :shell, :path => "puppet/scripts/virtualenv.sh"
+
+  # supervisor stuff
+  config.vm.provision :shell, :path => "puppet/scripts/supervisor.sh"
+
 
 end

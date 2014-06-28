@@ -19,4 +19,5 @@ sphinx
 johnny-cache
 django-pandora
 gunicorn
+MySQL-python==1.2.4
 

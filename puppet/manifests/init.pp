@@ -43,6 +43,15 @@ class { 'php::mod_php5': inifile => '/etc/httpd/conf/php.ini' }
 # Ensure Git is installed
 package { "git": ensure => present }
 
+# Ensure sendmail is installed and running
+package { "sendmail": ensure => present }
+service { "sendmail":
+  require => Package['sendmail'],
+  ensure  => running,
+  enable => true,
+}
+
+
 # Ensure mysql-devel present, for mysql-python in django 
 package { "mysql-devel": ensure => present }
 

@@ -16,6 +16,7 @@ Updated
 Setup DEV environment
 ======================
 git clone https://github.com/vinodpandey/treeio  
+cd treeio  
 vagrant up  
 vagrant ssh  
 cd /vagrant  

@@ -1,45 +1,47 @@
 Modifications
 ==============
+Updated treeio to add vagrant files for virtualbox. This makes the DEV environment setup quick, easy and less error-prone for newbies :).  
+
 Added
 + conf
 + puppet
-+ README.new.md
 + Vagrantfile
 
 Updated
 + .gitignore
 + requirements.pip
 + manage.py
++ README.markdown
 
 Setup DEV environment
 ======================
-git clone https://github.com/vinodpandey/treeio
-vagrant up
-vagrant ssh
-cd /vagrant
-source bin/activate
-sudo /vagrant/bin/pip install -r treeio/requirements.pip
-cd treeio
-sudo python related_fields_patch.py /vagrant/lib/python2.7/site-packages/django
+git clone https://github.com/vinodpandey/treeio  
+vagrant up  
+vagrant ssh  
+cd /vagrant  
+source bin/activate  
+sudo /vagrant/bin/pip install -r treeio/requirements.pip  
+cd treeio  
+sudo python related_fields_patch.py /vagrant/lib/python2.7/site-packages/django  
 
-create database treeio (http://192.168.33.10/phpmyadmin) (root/vagrant)
+create database treeio (http://192.168.33.10/phpmyadmin) (root/vagrant)  
 
-python manage.py installdb
-python manage.py loaddata data.json
+python manage.py installdb  
+python manage.py loaddata data.json  
 
-deactivate
-
+deactivate  
+  
 Running the server
 ===================
-cd /vagrant/treeio/bin
-./start.sh
-./stop.sh
+cd /vagrant/treeio/bin  
+./start.sh  
+./stop.sh  
 
 Website URL
 ============
-http://192.168.33.10:8000/
-update host file - example.com 192.168.33.10
-http://example.com
+http://192.168.33.10:8000/  
+update host file - example.com 192.168.33.10  
+http://example.com  
 
 
 

@@ -46,75 +46,75 @@ http://example.com
 
 
 
-Production setup
-=================
-mkdir webapps
-cd webapps
-mkdir website
-cd website
-wget https://github.com/vinodpandey/treeio/archive/master.zip
-unzip master.zip
-rm -rf master.zip
-mv treeio-master code
-ln -sfn code treeio
-virtualenv-2.7 --no-site-packages .
-source bin/activate
-pip install -r treeio/requirements.pip
-cd treeio
-DJANGO_DIR='python -c "import django; import os; print os.path.dirname(django.__file__)"'
-python related_fields_patch.py $DJANGO_DIR
+Production setup  
+=================  
+mkdir webapps  
+cd webapps  
+mkdir website  
+cd website  
+wget https://github.com/vinodpandey/treeio/archive/master.zip  
+unzip master.zip  
+rm -rf master.zip  
+mv treeio-master code  
+ln -sfn code treeio  
+virtualenv-2.7 --no-site-packages .  
+source bin/activate  
+pip install -r treeio/requirements.pip  
+cd treeio  
+DJANGO_DIR='python -c "import django; import os; print os.path.dirname(django.__file__)"'  
+python related_fields_patch.py $DJANGO_DIR  
 
-create database treeio
+create database treeio  
 
-python manage.py installdb
-python manage.py loaddata data.json
+python manage.py installdb  
+python manage.py loaddata data.json  
 
-verifying if everything configured fine
-python manage.py runserver 0.0.0.0:8124
+verifying if everything configured fine  
+python manage.py runserver 0.0.0.0:8124  
 
-deactivate
+deactivate  
 
-copy config/secrets.json to some where safe and update prod.py SECRETS path accordingly
-database setting are stored in core/db/dbsettings.json
-update secrets.json
+copy config/secrets.json to some where safe and update prod.py SECRETS path accordingly  
+database setting are stored in core/db/dbsettings.json  
+update secrets.json  
 
-install supervisior (https://github.com/vinodpandey/blog/blob/master/django-supervisor-unicorn)
-update supervisior.conf
-start service with supervisor
+install supervisior (https://github.com/vinodpandey/blog/blob/master/django-supervisor-unicorn)  
+update supervisior.conf  
+start service with supervisor  
 
-supervisor commands
-start
-sudo /usr/bin/supervisord -c /etc/supervisord.conf
+supervisor commands  
+start  
+sudo /usr/bin/supervisord -c /etc/supervisord.conf  
 
-status
-sudo supervisorctl status
-sudo supervisorctl start gunicorn_website
-sudo supervisorctl stop gunicorn_website
-ps aux | grep gunicorn_website
+status  
+sudo supervisorctl status  
+sudo supervisorctl start gunicorn_website  
+sudo supervisorctl stop gunicorn_website  
+ps aux | grep gunicorn_website  
 
-apache proxy configuration (for cPanel enabled host)
-mkdir -p /usr/local/apache/conf/userdata/std/2/user/website.com
-vi /usr/local/apache/conf/userdata/std/2/user/website.com/vhost.conf
+apache proxy configuration (for cPanel enabled host)  
+mkdir -p /usr/local/apache/conf/userdata/std/2/user/website.com  
+vi /usr/local/apache/conf/userdata/std/2/user/website.com/vhost.conf  
 
-vhost.conf
-----------
-ProxyPass / http://localhost:9000/
-ProxyPassReverse / http://localhost:9000/
-ProxyPreserveHost On
-RequestHeader set X-Forwarded-Proto "https" env=HTTPS
-------
+vhost.conf  
+----------  
+ProxyPass / http://localhost:9000/  
+ProxyPassReverse / http://localhost:9000/  
+ProxyPreserveHost On  
+RequestHeader set X-Forwarded-Proto "https" env=HTTPS  
+------  
 
 
-/scripts/verify_vhost_includes
-/scripts/ensure_vhost_includes --user=username
+/scripts/verify_vhost_includes  
+/scripts/ensure_vhost_includes --user=username  
 
 
 
 
 
 ImproperlyConfigured: Error loading either pysqlite2 or sqlite3 modules (tried in that order): No module named _sqlite3
-yum install sqlite-devel
-recompile python 2.7.3 (alternate install)
+yum install sqlite-devel  
+recompile python 2.7.3 (alternate install)  
 
 
 [![Build Status](https://secure.travis-ci.org/treeio/treeio.png?branch=master)](http://travis-ci.org/treeio/treeio)
